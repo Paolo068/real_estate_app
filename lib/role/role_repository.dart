@@ -11,6 +11,7 @@ class RoleRepository {
   Future<List<RoleModel>> getRoleList() async {
     try {
       final res = await _client.instance.get(Constants.getRoles);
+      logInfo('RESULT OF GETTING ROLES : ${res.data}');
       final roleList = (res.data['data'] as List).map((e) => RoleModel.fromMap(e)).toList();
       logInfo('ROLE LIST: $roleList');
       return roleList;
