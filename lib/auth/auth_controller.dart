@@ -1,10 +1,14 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:real_estate_app/api_client.dart';
 import 'package:real_estate_app/auth/auth_repository.dart';
+import 'package:real_estate_app/auth/client_home_screen.dart';
+import 'package:real_estate_app/auth/merchant_home_screen.dart';
+
+import '../role/role_provider.dart';
+import '../utils.dart';
 
 final apiClientProvider = Provider<ApiClient>((ref) {
   return ApiClient();
@@ -56,6 +60,6 @@ class AuthController extends AsyncNotifier<void> {
         email: email,
       );
     });
-    onSuccess?.call();
+    onSuccess!();
   }
 }

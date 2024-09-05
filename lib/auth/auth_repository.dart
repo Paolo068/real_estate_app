@@ -54,6 +54,7 @@ class AuthRepository {
       );
       logInfo('RESULT OF USER LOGIN : $res');
       await setToken(res.data['data']['access_token']);
+      await getCurrentUser();
     } on DioException catch (e) {
       logErr('DIO EXCEPTION : ${e.response?.data}');
     } catch (e) {
@@ -67,7 +68,9 @@ class AuthRepository {
         Constants.getCurrentUser,
       );
       logInfo('GET CURRENT USER : $res');
-      return res.data['data']['role'] as String;
+      final role = res.data['data']['role'] as String;
+      await setCurrentUser(role);
+      return role;
     } on DioException catch (e) {
       logErr('DIO EXCEPTION : ${e.response?.data}');
       rethrow;

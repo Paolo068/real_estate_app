@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:real_estate_app/auth/create_account_screen.dart';
+import 'package:real_estate_app/auth/login_screen.dart';
+import 'package:real_estate_app/auth/merchant_home_screen.dart';
 import 'package:real_estate_app/loggers.dart';
 
 void main() async {
@@ -24,7 +26,7 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: CreateAccountScreen(),
+          child: MerchantHomeScreen(),
         ),
       ),
     );

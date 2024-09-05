@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:real_estate_app/auth/auth_controller.dart';
-import 'package:real_estate_app/auth/loading_screen.dart';
+import 'package:real_estate_app/loggers.dart';
 
 import '../role/role_provider.dart';
 import 'login_screen.dart';
@@ -17,7 +17,7 @@ class CreateAccountScreen extends ConsumerStatefulWidget {
 }
 
 class _CreateAccountScreenState extends ConsumerState<CreateAccountScreen> {
-  String roleId = '';
+  String? roleId = '';
 
   final emailCtrl = TextEditingController();
   final nameCtrl = TextEditingController();
@@ -27,6 +27,8 @@ class _CreateAccountScreenState extends ConsumerState<CreateAccountScreen> {
   @override
   Widget build(BuildContext context) {
     final asyncRoles = ref.watch(roleListProvider);
+    roleId = asyncRoles.value?.first.id;
+    logInfo('RoleID => $roleId');
     return Scaffold(
         appBar: AppBar(
           title: const Text('Create Your Account'),
@@ -115,9 +117,9 @@ class _CreateAccountScreenState extends ConsumerState<CreateAccountScreen> {
                           ref.read(authControllerProvider.notifier).createAccount(
                                 name: nameCtrl.text,
                                 email: emailCtrl.text,
-                                role: roleId,
+                                role: roleId.toString(),
                                 phone: phoneCtrl.text,
-                                onSuccess: () => Navigator.of(context).pushReplacement(
+                                onSuccess: () => Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => const LoginScreen(),
                                   ),
